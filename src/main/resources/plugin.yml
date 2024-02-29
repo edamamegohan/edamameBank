@@ -1,0 +1,4 @@
+name: edamameBank
+version: '${project.version}'
+main: com.edamame.edamamebank.EdamameBank
+api-version: '1.20'
