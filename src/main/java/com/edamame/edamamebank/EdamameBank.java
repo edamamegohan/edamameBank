@@ -1,5 +1,6 @@
 package com.edamame.edamamebank;
 
+import com.edamame.edamamebank.commands.createbank;
 import com.edamame.edamamebank.database.Database;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -10,8 +11,9 @@ public final class EdamameBank extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        // Plugin startup logic
-        database.CreateConnection();
+        // コマンド実行処理のクラス分け
+        getCommand("bank").setExecutor(new createbank());
+
         database.CreateTable();
     }
 
