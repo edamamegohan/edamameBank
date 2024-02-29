@@ -1,0 +1,4 @@
+name: edamameBank
+version: '1.0-SNAPSHOT'
+main: com.edamame.edamamebank.EdamameBank
+api-version: '1.20'
