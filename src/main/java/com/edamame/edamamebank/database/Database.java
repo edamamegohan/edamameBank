@@ -65,4 +65,26 @@ public class Database {
             Bukkit.getLogger().warning("ーーーーーーーーーーーーーーー");
         }
     }
+
+    public void AddMoney(Player player, int add_money){
+        try{
+            String uuid = player.getUniqueId().toString();
+
+            ResultSet resultSet = statement.executeQuery("select money from moneydata where uuid = '" + uuid + "'");
+            int money = resultSet.getInt("money");
+
+            money = money + add_money;
+
+            this.statement.executeUpdate("update moneydata set money = " + money + " where uuid = '" + uuid + "'");
+
+            player.sendMessage("[edamameBank] " + player.getDisplayName() + "のお金を" + add_money + "円追加しました");
+            player.sendMessage("[edamameBank] " + player.getDisplayName() + "の現在の所持金は" + money + "円です");
+
+        }
+        catch (SQLException e){
+            Bukkit.getLogger().warning("ーーーーEdamameBankーーーー");
+            Bukkit.getLogger().warning(e.toString());
+            Bukkit.getLogger().warning("ーーーーーーーーーーーーーーー");
+        }
+    }
 }
