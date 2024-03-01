@@ -13,8 +13,8 @@ public final class EdamameBank extends JavaPlugin {
     @Override
     public void onEnable() {
         // コマンド実行処理のクラス分け
-        getCommand("bank").setExecutor(new createbank());
-        getCommand("bank").setExecutor(new addmoney());
+        getCommand("bankcreate").setExecutor(new createbank());
+        getCommand("addmoney").setExecutor(new addmoney());
 
         database.CreateTable();
     }

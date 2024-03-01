@@ -15,6 +15,10 @@ public class Database {
             Class.forName("org.sqlite.JDBC");
             this.connection = DriverManager.getConnection("jdbc:sqlite:" + this.BD_name);
             this.statement = connection.createStatement();
+
+            Bukkit.getLogger().info("ーーーーEdamameBankーーーー");
+            Bukkit.getLogger().info("データベースに接続しました");
+            Bukkit.getLogger().info("ーーーーーーーーーーーーーーー");
         }
         catch (Exception e){
             Bukkit.getLogger().warning("ーーーーedamameBankーーーー");
@@ -25,7 +29,7 @@ public class Database {
 
     public void CreateTable(){
         try{
-            this.statement.executeUpdate("create table moneydata(uuid text, money integer)");
+            this.statement.executeUpdate("create table moneydata(uuid text,name text, money integer)");
             Bukkit.getLogger().info("ーーーーEdamameBankーーーー");
             Bukkit.getLogger().info("moneydataテーブルを作成しました");
             Bukkit.getLogger().info("ーーーーーーーーーーーーーーー");
@@ -47,12 +51,13 @@ public class Database {
         }
     }
 
-    public void AddPlayerData(String uuid, Player player){
+    public void AddPlayerData(Player player, Player sender){
         try {
+            String uuid = player.getUniqueId().toString();
             String name = player.getDisplayName();
 
-            this.statement.executeUpdate("insert into moneydata values('" + uuid + "', 0)");
-            player.sendMessage("[edamameBank] " + name + "の口座が作成されました");
+            this.statement.executeUpdate("insert into moneydata values('" + uuid + "', '" + name + "', 0)");
+            sender.sendMessage("[edamameBank] " + name + "の口座が作成されました");
         }
         catch (SQLException e) {
             Bukkit.getLogger().warning("ーーーーEdamameBankーーーー");
@@ -61,7 +66,7 @@ public class Database {
         }
     }
 
-    public void AddMoney(Player player, int add_money){
+    public void AddMoney(Player player, int add_money, Player sender){
         try{
             String uuid = player.getUniqueId().toString();
 
@@ -72,8 +77,8 @@ public class Database {
 
             this.statement.executeUpdate("update moneydata set money = " + money + " where uuid = '" + uuid + "'");
 
-            player.sendMessage("[edamameBank] " + player.getDisplayName() + "のお金を" + add_money + "円追加しました");
-            player.sendMessage("[edamameBank] " + player.getDisplayName() + "の現在の所持金は" + money + "円です");
+            sender.sendMessage("[edamameBank] " + player.getDisplayName() + "のお金を" + add_money + "円追加しました");
+            sender.sendMessage("[edamameBank] " + player.getDisplayName() + "の現在の所持金は" + money + "円です");
 
         }
         catch (SQLException e){

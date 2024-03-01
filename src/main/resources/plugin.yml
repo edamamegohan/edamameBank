@@ -4,5 +4,8 @@ main: com.edamame.edamamebank.EdamameBank
 api-version: '1.20'
 
 commands:
-  bank:
+  bankcreate:
+    description: description
+
+  addmoney:
     description: description

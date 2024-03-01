@@ -12,14 +12,28 @@ public class createbank implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if(command.getName().equalsIgnoreCase("bank") && args[0].equalsIgnoreCase("create")){
-            Bukkit.getLogger().info("/bank create実行");
+        if(command.getName().equalsIgnoreCase("bankcreate")){
+            // /bankcreate [ユーザー名]
 
-            Player player = (Player)sender;
-            String uuid = player.getUniqueId().toString();
+            Bukkit.getLogger().info("/bankcreate実行");
+            Player commandsender = (Player)sender;
 
-            database.AddPlayerData(uuid, player);
-            return true;
+            if(args.length != 1){
+                commandsender.sendMessage("[edamameBank] /bankcreate [ユーザー名] の形で入力してください");
+                Bukkit.getLogger().warning("/bankcreate構文エラー");
+                return false;
+            }
+
+            Player player = Bukkit.getPlayer(args[0]);
+
+            if(player != null){
+                database.AddPlayerData(player, commandsender);
+                return true;
+            }else {
+                commandsender.sendMessage("[edamameBank] " + args[0] + "は現在オフラインです");
+                Bukkit.getLogger().warning("/bankcreate名前エラー");
+                return false;
+            }
         }
 
         return false;
