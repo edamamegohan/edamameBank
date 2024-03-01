@@ -15,11 +15,6 @@ public class Database {
             Class.forName("org.sqlite.JDBC");
             this.connection = DriverManager.getConnection("jdbc:sqlite:" + this.BD_name);
             this.statement = connection.createStatement();
-
-            this.statement.executeUpdate("create table moneydata(uuid text, money integer");
-            Bukkit.getLogger().info("ーーーーEdamameBankーーーー");
-            Bukkit.getLogger().info("database.dbを作成しました");
-            Bukkit.getLogger().info("ーーーーーーーーーーーーーーー");
         }
         catch (Exception e){
             Bukkit.getLogger().warning("ーーーーedamameBankーーーー");
