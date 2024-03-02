@@ -1,6 +1,7 @@
 package com.edamame.edamamebank.database;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import java.sql.*;
@@ -57,7 +58,9 @@ public class Database {
             String name = player.getDisplayName();
 
             this.statement.executeUpdate("insert into moneydata values('" + uuid + "', '" + name + "', 0)");
-            sender.sendMessage("[edamameBank] " + name + "の口座が作成されました");
+            sender.sendMessage(ChatColor.GREEN + "[edamameBank] " +
+                    ChatColor.YELLOW + ChatColor.BOLD + name +
+                    ChatColor.WHITE + ChatColor.BOLD +  "の口座が作成されました");
         }
         catch (SQLException e) {
             Bukkit.getLogger().warning("ーーーーEdamameBankーーーー");
@@ -77,11 +80,38 @@ public class Database {
 
             this.statement.executeUpdate("update moneydata set money = " + money + " where uuid = '" + uuid + "'");
 
-            sender.sendMessage("[edamameBank] " + player.getDisplayName() + "のお金を" + add_money + "円追加しました");
-            sender.sendMessage("[edamameBank] " + player.getDisplayName() + "の現在の所持金は" + money + "円です");
+            sender.sendMessage(ChatColor.GREEN + "[edamameBank] " +
+                    ChatColor.YELLOW + ChatColor.BOLD + player.getDisplayName() +
+                    ChatColor.WHITE + ChatColor.BOLD + "のお金を" +
+                    ChatColor.YELLOW + ChatColor.BOLD +add_money +
+                    ChatColor.WHITE + ChatColor.BOLD + "円追加しました");
 
+            //sender.sendMessage("[edamameBank] " + player.getDisplayName() + "の現在の所持金は" + money + "円です");
+            resultSet.close();
         }
         catch (SQLException e){
+            Bukkit.getLogger().warning("ーーーーEdamameBankーーーー");
+            Bukkit.getLogger().warning(e.toString());
+            Bukkit.getLogger().warning("ーーーーーーーーーーーーーーー");
+        }
+    }
+
+    public void CheckMoney(Player player){
+        String uuid = player.getUniqueId().toString();
+        String name = player.getDisplayName();
+
+        try {
+            ResultSet resultSet = statement.executeQuery("select money from moneydata where uuid = '" + uuid + "'");
+            int money = resultSet.getInt("money");
+
+            player.sendMessage(ChatColor.GREEN + "[edamameBank] " +
+                    ChatColor.YELLOW + ChatColor.BOLD + name +
+                    ChatColor.WHITE + ChatColor.BOLD + "の現在の所持金は" +
+                    ChatColor.YELLOW + ChatColor.BOLD + money +
+                    ChatColor.WHITE + ChatColor.BOLD + "円です");
+
+            resultSet.close();
+        } catch (SQLException e) {
             Bukkit.getLogger().warning("ーーーーEdamameBankーーーー");
             Bukkit.getLogger().warning(e.toString());
             Bukkit.getLogger().warning("ーーーーーーーーーーーーーーー");

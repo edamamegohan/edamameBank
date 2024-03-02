@@ -9,3 +9,6 @@ commands:
 
   addmoney:
     description: description
+
+  bank:
+    description: description
