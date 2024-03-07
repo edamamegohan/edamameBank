@@ -119,6 +119,42 @@ public class Database {
     }
 
     public void PayMoney(Player sender, Player receiver, int money){
+        String sender_uuid = sender.getUniqueId().toString();
+        String sender_name = sender.getDisplayName();
+        String receiver_uuid = receiver.getUniqueId().toString();
+        String receiver_name = receiver.getDisplayName();
 
+        try {
+            ResultSet resultSet = statement.executeQuery("select money from moneydata where uuid = '" + sender_uuid + "'");
+            int sender_money = resultSet.getInt("money");
+            resultSet = statement.executeQuery("select money from moneydata where uuid = '" + receiver_uuid + "'");
+            int receiver_money = resultSet.getInt("money");
+
+            sender_money = sender_money - money;
+            receiver_money = receiver_money + money;
+
+            resultSet.close();
+
+            this.statement.executeUpdate("update moneydata set money = " + sender_money + " where uuid = '" + sender_uuid + "'");
+            this.statement.executeUpdate("update moneydata set money = " + receiver_money + " where uuid = '" + receiver_uuid + "'");
+
+            sender.sendMessage(ChatColor.GREEN + "[edamameBank] " +
+                    ChatColor.YELLOW + ChatColor.BOLD + receiver_name +
+                    ChatColor.WHITE + ChatColor.BOLD + "に" +
+                    ChatColor.YELLOW + ChatColor.BOLD + money +
+                    ChatColor.WHITE + ChatColor.BOLD + "円送金しました");
+
+            receiver.sendMessage(ChatColor.GREEN + "[edamameBank] " +
+                    ChatColor.YELLOW + ChatColor.BOLD + sender_name +
+                    ChatColor.WHITE + ChatColor.BOLD + "から" +
+                    ChatColor.YELLOW + ChatColor.BOLD + money +
+                    ChatColor.WHITE + ChatColor.BOLD + "円を受け取りました");
+
+
+        } catch (SQLException e) {
+            Bukkit.getLogger().warning("ーーーーEdamameBankーーーー");
+            Bukkit.getLogger().warning(e.toString());
+            Bukkit.getLogger().warning("ーーーーーーーーーーーーーーー");
+        }
     }
 }

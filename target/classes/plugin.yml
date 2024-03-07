@@ -12,3 +12,6 @@ commands:
 
   bank:
     description: description
+
+  pay:
+    description: description
