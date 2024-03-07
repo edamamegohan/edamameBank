@@ -2,6 +2,7 @@ package com.edamame.edamamebank.commands;
 
 import com.edamame.edamamebank.database.Database;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -18,8 +19,10 @@ public class addmoney implements CommandExecutor {
             Bukkit.getLogger().info("/addmoney実行");
 
             if(args.length != 2){
-                commandsender.sendMessage("[edamameBank] /addmoney [ユーザー名] [値]の形で入力してください");
-                Bukkit.getLogger().warning("/bankcreate構文エラー");
+                commandsender.sendMessage(ChatColor.RED + "[edamameBank] "+
+                        ChatColor.YELLOW + ChatColor.BOLD+"/addmoney [ユーザー名] [値]" +
+                        ChatColor.WHITE + ChatColor.BOLD + "の形で入力してください");
+                Bukkit.getLogger().warning("/addmoney構文エラー");
                 return false;
             }
 
@@ -29,8 +32,10 @@ public class addmoney implements CommandExecutor {
                 database.AddMoney(player, Integer.parseInt(args[1]), commandsender);
                 return true;
             }else {
-                commandsender.sendMessage("[edamameBank] " + args[0] + "は現在オフラインです");
-                Bukkit.getLogger().warning("/bankcreate名前エラー");
+                commandsender.sendMessage(ChatColor.RED + "[edamameBank] " +
+                        ChatColor.YELLOW + ChatColor.BOLD + args[0] +
+                        ChatColor.WHITE + ChatColor.BOLD + "は現在オフラインです");
+                Bukkit.getLogger().warning("/addmoney名前エラー");
                 return false;
             }
         }

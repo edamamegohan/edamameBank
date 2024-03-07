@@ -2,6 +2,7 @@ package com.edamame.edamamebank.commands;
 
 import com.edamame.edamamebank.database.Database;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -19,7 +20,9 @@ public class createbank implements CommandExecutor {
             Player commandsender = (Player)sender;
 
             if(args.length != 1){
-                commandsender.sendMessage("[edamameBank] /bankcreate [ユーザー名] の形で入力してください");
+                commandsender.sendMessage(ChatColor.RED + "[edamameBank] "+
+                        ChatColor.YELLOW + ChatColor.BOLD+"/bankcreate [ユーザー名]" +
+                        ChatColor.WHITE + ChatColor.BOLD + "の形で入力してください");
                 Bukkit.getLogger().warning("/bankcreate構文エラー");
                 return false;
             }
@@ -30,7 +33,9 @@ public class createbank implements CommandExecutor {
                 database.AddPlayerData(player, commandsender);
                 return true;
             }else {
-                commandsender.sendMessage("[edamameBank] " + args[0] + "は現在オフラインです");
+                commandsender.sendMessage(ChatColor.RED + "[edamameBank] " +
+                        ChatColor.YELLOW + ChatColor.BOLD + args[0] +
+                        ChatColor.WHITE + ChatColor.BOLD + "は現在オフラインです");
                 Bukkit.getLogger().warning("/bankcreate名前エラー");
                 return false;
             }

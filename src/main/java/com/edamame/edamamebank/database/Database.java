@@ -117,4 +117,8 @@ public class Database {
             Bukkit.getLogger().warning("ーーーーーーーーーーーーーーー");
         }
     }
+
+    public void PayMoney(Player sender, Player receiver, int money){
+
+    }
 }
