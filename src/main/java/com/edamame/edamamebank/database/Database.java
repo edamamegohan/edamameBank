@@ -130,6 +130,13 @@ public class Database {
             resultSet = statement.executeQuery("select money from moneydata where uuid = '" + receiver_uuid + "'");
             int receiver_money = resultSet.getInt("money");
 
+            if(sender_money < money){
+                sender.sendMessage(ChatColor.RED + "[edamameBank] " +
+                        ChatColor.WHITE + ChatColor.BOLD + "payする金額は自分の所持金以下でないといけません");
+                Bukkit.getLogger().warning("/pay金額エラー");
+                return;
+            }
+
             sender_money = sender_money - money;
             receiver_money = receiver_money + money;
 
