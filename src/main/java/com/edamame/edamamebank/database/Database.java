@@ -129,7 +129,7 @@ public class Database {
             int receiver_money = resultSet.getInt("money");
 
             if(sender_money < money){
-                sender.sendMessage(ChatColor.RED + "[edamameBank] " +
+                sender.sendMessage(ChatColor.RED + "[edamameBank error] " +
                         ChatColor.WHITE + ChatColor.BOLD + "payする金額は自分の所持金以下でないといけません");
                 Bukkit.getLogger().warning("/pay金額エラー");
                 return;

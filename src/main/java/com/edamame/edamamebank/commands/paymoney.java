@@ -17,7 +17,7 @@ public class paymoney implements CommandExecutor {
             Player sender = (Player) commandSender;
 
             if(args.length != 2){
-                sender.sendMessage(ChatColor.RED + "[edamameBank Error] " +
+                sender.sendMessage(ChatColor.RED + "[edamameBank error] " +
                                 ChatColor.YELLOW + ChatColor.BOLD + "/pay [ユーザー名] [値]" +
                                 ChatColor.WHITE + ChatColor.BOLD + "の形で入力してください");
                 Bukkit.getLogger().warning("/pay構文エラー");
@@ -28,13 +28,13 @@ public class paymoney implements CommandExecutor {
             int money = Integer.parseInt(args[1]);
 
             if(receiver == null){
-                sender.sendMessage(ChatColor.RED + "[edamameBank] " +
+                sender.sendMessage(ChatColor.RED + "[edamameBank error] " +
                         ChatColor.YELLOW + ChatColor.BOLD + args[0] +
                         ChatColor.WHITE + ChatColor.BOLD + "は現在オフラインです");
                 Bukkit.getLogger().warning("/pay名前エラー");
                 return false;
             } else if (money <= 0) {
-                sender.sendMessage(ChatColor.RED + "[edamameBank] " +
+                sender.sendMessage(ChatColor.RED + "[edamameBank error] " +
                         ChatColor.WHITE + ChatColor.BOLD + "payする金額は1円以上でないといけません");
                 Bukkit.getLogger().warning("/pay金額エラー");
                 return false;

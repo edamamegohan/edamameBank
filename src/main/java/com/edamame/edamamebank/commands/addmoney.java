@@ -19,7 +19,7 @@ public class addmoney implements CommandExecutor {
             Bukkit.getLogger().info("/addmoney実行");
 
             if(args.length != 2){
-                commandsender.sendMessage(ChatColor.RED + "[edamameBank] "+
+                commandsender.sendMessage(ChatColor.RED + "[edamameBank error] "+
                         ChatColor.YELLOW + ChatColor.BOLD+"/addmoney [ユーザー名] [値]" +
                         ChatColor.WHITE + ChatColor.BOLD + "の形で入力してください");
                 Bukkit.getLogger().warning("/addmoney構文エラー");

@@ -20,7 +20,7 @@ public class createbank implements CommandExecutor {
             Player commandsender = (Player)sender;
 
             if(args.length != 1){
-                commandsender.sendMessage(ChatColor.RED + "[edamameBank] "+
+                commandsender.sendMessage(ChatColor.RED + "[edamameBank error] "+
                         ChatColor.YELLOW + ChatColor.BOLD+"/bankcreate [ユーザー名]" +
                         ChatColor.WHITE + ChatColor.BOLD + "の形で入力してください");
                 Bukkit.getLogger().warning("/bankcreate構文エラー");
@@ -33,7 +33,7 @@ public class createbank implements CommandExecutor {
                 database.AddPlayerData(player, commandsender);
                 return true;
             }else {
-                commandsender.sendMessage(ChatColor.RED + "[edamameBank] " +
+                commandsender.sendMessage(ChatColor.RED + "[edamameBank error] " +
                         ChatColor.YELLOW + ChatColor.BOLD + args[0] +
                         ChatColor.WHITE + ChatColor.BOLD + "は現在オフラインです");
                 Bukkit.getLogger().warning("/bankcreate名前エラー");
