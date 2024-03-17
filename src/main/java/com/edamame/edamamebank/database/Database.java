@@ -7,14 +7,14 @@ import org.bukkit.entity.Player;
 import java.sql.*;
 
 public class Database {
-    private final String BD_name = "database.db";
+    private final String DB_name = "database.db";
     private Connection connection = null;
     private Statement statement = null;
 
     public Database(){
         try{
             Class.forName("org.sqlite.JDBC");
-            this.connection = DriverManager.getConnection("jdbc:sqlite:" + this.BD_name);
+            this.connection = DriverManager.getConnection("jdbc:sqlite:" + this.DB_name);
             this.statement = connection.createStatement();
 
             Bukkit.getLogger().info("ーーーーEdamameBankーーーー");
