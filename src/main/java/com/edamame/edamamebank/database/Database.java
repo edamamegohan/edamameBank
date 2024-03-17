@@ -11,7 +11,7 @@ public class Database {
     private Connection connection = null;
     private Statement statement = null;
 
-    public void CreateTable(){
+    public Database(){
         try{
             Class.forName("org.sqlite.JDBC");
             this.connection = DriverManager.getConnection("jdbc:sqlite:" + this.BD_name);
@@ -28,7 +28,9 @@ public class Database {
             Bukkit.getLogger().warning(e.toString());
             Bukkit.getLogger().warning("ーーーーーーーーーーーーーーー");
         }
+    }
 
+    public void CreateTable(){
         try{
             this.statement.executeUpdate("create table moneydata(uuid text,name text, money integer)");
             Bukkit.getLogger().info("ーーーーEdamameBankーーーー");
@@ -54,6 +56,7 @@ public class Database {
 
     public void AddPlayerData(Player player, Player sender){
         try {
+            this.statement = connection.createStatement();
             String uuid = player.getUniqueId().toString();
             String name = player.getDisplayName();
 
