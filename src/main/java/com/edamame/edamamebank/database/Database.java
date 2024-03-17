@@ -20,6 +20,8 @@ public class Database {
             Bukkit.getLogger().info("ーーーーEdamameBankーーーー");
             Bukkit.getLogger().info("データベースに接続しました");
             Bukkit.getLogger().info("ーーーーーーーーーーーーーーー");
+
+            statement.close();
         }
         catch (Exception e){
             Bukkit.getLogger().warning("ーーーーedamameBankーーーー");
@@ -55,10 +57,13 @@ public class Database {
             String uuid = player.getUniqueId().toString();
             String name = player.getDisplayName();
 
+            this.statement = connection.createStatement();
             this.statement.executeUpdate("insert into moneydata values('" + uuid + "', '" + name + "', 0)");
             sender.sendMessage(ChatColor.GREEN + "[edamameBank] " +
                     ChatColor.YELLOW + ChatColor.BOLD + name +
                     ChatColor.WHITE + ChatColor.BOLD +  "の口座が作成されました");
+
+            statement.close();
         }
         catch (SQLException e) {
             Bukkit.getLogger().warning("ーーーーEdamameBankーーーー");
@@ -71,6 +76,7 @@ public class Database {
         try{
             String uuid = player.getUniqueId().toString();
 
+            this.statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("select money from moneydata where uuid = '" + uuid + "'");
             int money = resultSet.getInt("money");
 
@@ -86,6 +92,7 @@ public class Database {
 
             //sender.sendMessage("[edamameBank] " + player.getDisplayName() + "の現在の所持金は" + money + "円です");
             resultSet.close();
+            statement.close();
         }
         catch (SQLException e){
             Bukkit.getLogger().warning("ーーーーEdamameBankーーーー");
@@ -99,6 +106,7 @@ public class Database {
         String name = player.getDisplayName();
 
         try {
+            this.statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("select money from moneydata where uuid = '" + uuid + "'");
             int money = resultSet.getInt("money");
 
@@ -109,6 +117,7 @@ public class Database {
                     ChatColor.WHITE + ChatColor.BOLD + "円です");
 
             resultSet.close();
+            statement.close();
         } catch (SQLException e) {
             Bukkit.getLogger().warning("ーーーーEdamameBankーーーー");
             Bukkit.getLogger().warning(e.toString());
@@ -123,6 +132,7 @@ public class Database {
         String receiver_name = receiver.getDisplayName();
 
         try {
+            this.statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("select money from moneydata where uuid = '" + sender_uuid + "'");
             int sender_money = resultSet.getInt("money");
             resultSet = statement.executeQuery("select money from moneydata where uuid = '" + receiver_uuid + "'");
@@ -155,7 +165,7 @@ public class Database {
                     ChatColor.YELLOW + ChatColor.BOLD + money +
                     ChatColor.WHITE + ChatColor.BOLD + "円を受け取りました");
 
-
+            statement.close();
         } catch (SQLException e) {
             Bukkit.getLogger().warning("ーーーーEdamameBankーーーー");
             Bukkit.getLogger().warning(e.toString());
