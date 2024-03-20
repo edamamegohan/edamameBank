@@ -32,9 +32,9 @@ public class Database {
 
     public void CreateTable(){
         try{
-            this.statement.executeUpdate("create table moneydata(uuid text,name text, money integer)");
+            this.statement.executeUpdate("create table playerdata(uuid text,name text, money integer)");
             Bukkit.getLogger().info("ーーーーEdamameBankーーーー");
-            Bukkit.getLogger().info("moneydataテーブルを作成しました");
+            Bukkit.getLogger().info("playerdataテーブルを作成しました");
             Bukkit.getLogger().info("ーーーーーーーーーーーーーーー");
             //this.connection.commit();
         }
@@ -61,7 +61,7 @@ public class Database {
             String name = player.getDisplayName();
 
             this.statement = connection.createStatement();
-            this.statement.executeUpdate("insert into moneydata values('" + uuid + "', '" + name + "', 0)");
+            this.statement.executeUpdate("insert into playerdata values('" + uuid + "', '" + name + "', 0)");
             sender.sendMessage(ChatColor.GREEN + "[edamameBank] " +
                     ChatColor.YELLOW + ChatColor.BOLD + name +
                     ChatColor.WHITE + ChatColor.BOLD +  "の口座が作成されました");
@@ -80,12 +80,12 @@ public class Database {
             String uuid = player.getUniqueId().toString();
 
             this.statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("select money from moneydata where uuid = '" + uuid + "'");
+            ResultSet resultSet = statement.executeQuery("select money from playerdata where uuid = '" + uuid + "'");
             int money = resultSet.getInt("money");
 
             money = money + add_money;
 
-            this.statement.executeUpdate("update moneydata set money = " + money + " where uuid = '" + uuid + "'");
+            this.statement.executeUpdate("update playerdata set money = " + money + " where uuid = '" + uuid + "'");
 
             sender.sendMessage(ChatColor.GREEN + "[edamameBank] " +
                     ChatColor.YELLOW + ChatColor.BOLD + player.getDisplayName() +
@@ -110,7 +110,7 @@ public class Database {
 
         try {
             this.statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("select money from moneydata where uuid = '" + uuid + "'");
+            ResultSet resultSet = statement.executeQuery("select money from playerdata where uuid = '" + uuid + "'");
             int money = resultSet.getInt("money");
 
             player.sendMessage(ChatColor.GREEN + "[edamameBank] " +
@@ -136,9 +136,9 @@ public class Database {
 
         try {
             this.statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("select money from moneydata where uuid = '" + sender_uuid + "'");
+            ResultSet resultSet = statement.executeQuery("select money from playerdata where uuid = '" + sender_uuid + "'");
             int sender_money = resultSet.getInt("money");
-            resultSet = statement.executeQuery("select money from moneydata where uuid = '" + receiver_uuid + "'");
+            resultSet = statement.executeQuery("select money from playerdata where uuid = '" + receiver_uuid + "'");
             int receiver_money = resultSet.getInt("money");
 
             if(sender_money < money){
@@ -153,8 +153,8 @@ public class Database {
 
             resultSet.close();
 
-            this.statement.executeUpdate("update moneydata set money = " + sender_money + " where uuid = '" + sender_uuid + "'");
-            this.statement.executeUpdate("update moneydata set money = " + receiver_money + " where uuid = '" + receiver_uuid + "'");
+            this.statement.executeUpdate("update playerdata set money = " + sender_money + " where uuid = '" + sender_uuid + "'");
+            this.statement.executeUpdate("update playerdata set money = " + receiver_money + " where uuid = '" + receiver_uuid + "'");
 
             sender.sendMessage(ChatColor.GREEN + "[edamameBank] " +
                     ChatColor.YELLOW + ChatColor.BOLD + receiver_name +
