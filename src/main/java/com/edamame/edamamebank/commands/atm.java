@@ -67,7 +67,6 @@ public class atm implements CommandExecutor, Listener {
             for (String lore : clickedItem.getItemMeta().getLore()) {
                 if (lore.equalsIgnoreCase("交易や電子マネーに変換することができる通貨")) {
                     int ClickedCustomModelData = clickedItem.getItemMeta().getCustomModelData();
-                    player.sendMessage("クリック検出 " + ClickedCustomModelData);
 
                     //左クリックされた時の処理
                     if(event.isLeftClick()){
@@ -76,13 +75,11 @@ public class atm implements CommandExecutor, Listener {
                         for(int i = 0; i < contents.length; i++){
                             ItemStack item = contents[i];
                             if(item != null && item.getType() == Material.GOLD_INGOT){
-                                player.sendMessage("金インゴット検出");
                                 ItemMeta meta = item.getItemMeta();
                                 int MoneyCustomModelData = meta.getCustomModelData();
 
                                 //クリックしたアイテムと同じ現金を持っていた時
                                 if(MoneyCustomModelData == ClickedCustomModelData){
-                                    player.sendMessage("同じアイテム検出");
                                     found = true;
                                     int amount = item.getAmount();
                                     if (amount == 1) {
@@ -93,6 +90,7 @@ public class atm implements CommandExecutor, Listener {
                                         item.setAmount(amount - 1);
                                         player.getInventory().setItem(i, item);
                                     }
+                                    database.AddMoney(player, (int)Math.pow(10, MoneyCustomModelData));
                                     break;
                                 }
                             }

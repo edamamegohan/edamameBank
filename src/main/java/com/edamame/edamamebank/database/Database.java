@@ -17,9 +17,11 @@ public class Database {
             this.connection = DriverManager.getConnection("jdbc:sqlite:" + this.DB_name);
             this.statement = connection.createStatement();
 
+            /*
             Bukkit.getLogger().info("ーーーーEdamameBankーーーー");
             Bukkit.getLogger().info("データベースに接続しました");
             Bukkit.getLogger().info("ーーーーーーーーーーーーーーー");
+             */
 
             statement.close();
         }
