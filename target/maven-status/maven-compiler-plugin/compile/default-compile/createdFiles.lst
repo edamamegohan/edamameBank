@@ -3,4 +3,5 @@ com\edamame\edamamebank\commands\paymoney.class
 com\edamame\edamamebank\commands\addmoney.class
 com\edamame\edamamebank\EdamameBank.class
 com\edamame\edamamebank\commands\createbank.class
+com\edamame\edamamebank\commands\atm.class
 com\edamame\edamamebank\database\Database.class

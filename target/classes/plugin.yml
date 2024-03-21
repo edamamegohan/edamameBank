@@ -15,3 +15,6 @@ commands:
 
   pay:
     description: description
+
+  atm:
+    description: description

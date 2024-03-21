@@ -30,7 +30,7 @@ public class createbank implements CommandExecutor {
             Player player = Bukkit.getPlayer(args[0]);
 
             if(player != null){
-                database.AddPlayerData(player, commandsender);
+                database.Addmoneydata(player, commandsender);
                 return true;
             }else {
                 commandsender.sendMessage(ChatColor.RED + "[edamameBank error] " +

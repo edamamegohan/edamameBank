@@ -1,10 +1,8 @@
 package com.edamame.edamamebank;
 
-import com.edamame.edamamebank.commands.addmoney;
-import com.edamame.edamamebank.commands.checkbank;
-import com.edamame.edamamebank.commands.createbank;
-import com.edamame.edamamebank.commands.paymoney;
+import com.edamame.edamamebank.commands.*;
 import com.edamame.edamamebank.database.Database;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import javax.xml.crypto.Data;
@@ -19,6 +17,8 @@ public final class EdamameBank extends JavaPlugin {
         getCommand("addmoney").setExecutor(new addmoney());
         getCommand("bank").setExecutor(new checkbank());
         getCommand("pay").setExecutor(new paymoney());
+        getCommand("atm").setExecutor(new atm());
+        Bukkit.getPluginManager().registerEvents(new atm(), this);
 
         database.CreateTable();
     }
