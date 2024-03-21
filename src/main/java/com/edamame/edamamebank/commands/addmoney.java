@@ -29,7 +29,12 @@ public class addmoney implements CommandExecutor {
             Player player = Bukkit.getPlayer(args[0]);
 
             if(player != null){
-                database.AddMoney(player, Integer.parseInt(args[1]), commandsender);
+                database.AddMoney(player, Integer.parseInt(args[1]));
+                sender.sendMessage(ChatColor.GREEN + "[edamameBank] " +
+                        ChatColor.YELLOW + ChatColor.BOLD + player.getDisplayName() +
+                        ChatColor.WHITE + ChatColor.BOLD + "のお金を" +
+                        ChatColor.YELLOW + ChatColor.BOLD + Integer.parseInt(args[1]) +
+                        ChatColor.WHITE + ChatColor.BOLD + "円追加しました");
                 return true;
             }else {
                 commandsender.sendMessage(ChatColor.RED + "[edamameBank] " +

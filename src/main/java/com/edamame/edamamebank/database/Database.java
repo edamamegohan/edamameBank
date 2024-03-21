@@ -75,7 +75,7 @@ public class Database {
         }
     }
 
-    public void AddMoney(Player player, int add_money, Player sender){
+    public void AddMoney(Player player, int add_money){
         try{
             String uuid = player.getUniqueId().toString();
 
@@ -86,12 +86,6 @@ public class Database {
             money = money + add_money;
 
             this.statement.executeUpdate("update moneydata set money = " + money + " where uuid = '" + uuid + "'");
-
-            sender.sendMessage(ChatColor.GREEN + "[edamameBank] " +
-                    ChatColor.YELLOW + ChatColor.BOLD + player.getDisplayName() +
-                    ChatColor.WHITE + ChatColor.BOLD + "のお金を" +
-                    ChatColor.YELLOW + ChatColor.BOLD +add_money +
-                    ChatColor.WHITE + ChatColor.BOLD + "円追加しました");
 
             //sender.sendMessage("[edamameBank] " + player.getDisplayName() + "の現在の所持金は" + money + "円です");
             resultSet.close();
