@@ -100,27 +100,22 @@ public class Database {
         }
     }
 
-    public void CheckMoney(Player player){
+    public int CheckMoney(Player player){
         String uuid = player.getUniqueId().toString();
-        String name = player.getDisplayName();
 
         try {
             this.statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("select money from moneydata where uuid = '" + uuid + "'");
             int money = resultSet.getInt("money");
 
-            player.sendMessage(ChatColor.GREEN + "[edamameBank] " +
-                    ChatColor.YELLOW + ChatColor.BOLD + name +
-                    ChatColor.WHITE + ChatColor.BOLD + "の現在の所持金は" +
-                    ChatColor.YELLOW + ChatColor.BOLD + money +
-                    ChatColor.WHITE + ChatColor.BOLD + "円です");
-
             resultSet.close();
             statement.close();
+            return money;
         } catch (SQLException e) {
             Bukkit.getLogger().warning("ーーーーEdamameBankーーーー");
             Bukkit.getLogger().warning(e.toString());
             Bukkit.getLogger().warning("ーーーーーーーーーーーーーーー");
+            return 0;
         }
     }
 
