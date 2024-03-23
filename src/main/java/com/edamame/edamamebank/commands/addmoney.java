@@ -16,6 +16,13 @@ public class addmoney implements CommandExecutor {
             // /addmoney [ユーザー名] [値]
 
             Player commandsender = (Player)sender;
+
+            if(!commandsender.hasPermission("edamameBank.addmoney")){
+                commandsender.sendMessage(ChatColor.RED + "[edamameBank error] "+
+                        ChatColor.WHITE + ChatColor.BOLD + "このコマンドを実行する権限がありません");
+                return true;
+            }
+
             Bukkit.getLogger().info("/addmoney実行");
 
             if(args.length != 2){

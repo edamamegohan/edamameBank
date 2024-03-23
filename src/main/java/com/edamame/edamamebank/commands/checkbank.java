@@ -14,6 +14,13 @@ public class checkbank implements CommandExecutor {
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         if(command.getName().equalsIgnoreCase("bank")){
             Player sender = (Player) commandSender;
+
+            if(!sender.hasPermission("edamameBank.bank")){
+                sender.sendMessage(ChatColor.RED + "[edamameBank error] "+
+                        ChatColor.WHITE + ChatColor.BOLD + "このコマンドを実行する権限がありません");
+                return true;
+            }
+
             int money = database.CheckMoney(sender);
             sender.sendMessage(ChatColor.GREEN + "[edamameBank] " +
                     ChatColor.YELLOW + ChatColor.BOLD + sender.getDisplayName() +

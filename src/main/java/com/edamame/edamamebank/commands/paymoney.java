@@ -16,6 +16,12 @@ public class paymoney implements CommandExecutor {
         if(command.getName().equalsIgnoreCase("pay")){
             Player sender = (Player) commandSender;
 
+            if(!sender.hasPermission("edamameBank.pay")){
+                sender.sendMessage(ChatColor.RED + "[edamameBank error] "+
+                        ChatColor.WHITE + ChatColor.BOLD + "このコマンドを実行する権限がありません");
+                return true;
+            }
+
             if(args.length != 2){
                 sender.sendMessage(ChatColor.RED + "[edamameBank error] " +
                                 ChatColor.YELLOW + ChatColor.BOLD + "/pay [ユーザー名] [値]" +

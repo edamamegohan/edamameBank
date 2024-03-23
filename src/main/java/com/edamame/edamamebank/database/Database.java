@@ -44,7 +44,7 @@ public class Database {
                 Bukkit.getLogger().warning("ーーーーEdamameBankーーーー");
                 Bukkit.getLogger().warning(e.toString());
                 Bukkit.getLogger().warning("ーーーーーーーーーーーーーーー");
-            }
+        }
     }
 
     public void CloseConnection(){

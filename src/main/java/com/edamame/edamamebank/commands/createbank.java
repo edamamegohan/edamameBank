@@ -19,6 +19,12 @@ public class createbank implements CommandExecutor {
             Bukkit.getLogger().info("/bankcreate実行");
             Player commandsender = (Player)sender;
 
+            if(!commandsender.hasPermission("edamameBank.addmoney")){
+                commandsender.sendMessage(ChatColor.RED + "[edamameBank error] "+
+                        ChatColor.WHITE + ChatColor.BOLD + "このコマンドを実行する権限がありません");
+                return true;
+            }
+
             if(args.length != 1){
                 commandsender.sendMessage(ChatColor.RED + "[edamameBank error] "+
                         ChatColor.YELLOW + ChatColor.BOLD+"/bankcreate [ユーザー名]" +

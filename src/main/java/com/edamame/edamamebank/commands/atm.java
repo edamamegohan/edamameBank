@@ -24,6 +24,12 @@ public class atm implements CommandExecutor, Listener {
         if (command.getName().equalsIgnoreCase("atm")) {
             Player player = (Player) commandSender;
 
+            if(!player.hasPermission("edamameBank.atm")){
+                player.sendMessage(ChatColor.RED + "[edamameBank error] "+
+                        ChatColor.WHITE + ChatColor.BOLD + "このコマンドを実行する権限がありません");
+                return true;
+            }
+
             Inventory inventory = Bukkit.createInventory(null, 9, "ATM");
 
             for(int i = 0; i < 8; i++){
