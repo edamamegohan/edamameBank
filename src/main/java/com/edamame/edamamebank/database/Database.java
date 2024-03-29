@@ -61,12 +61,14 @@ public class Database {
             this.statement = connection.createStatement();
             String uuid = player.getUniqueId().toString();
             String name = player.getDisplayName();
+            ResultSet resultSet = statement.executeQuery("select * from minedata where uuid = '" + uuid + "'");
 
-            this.statement = connection.createStatement();
-            this.statement.executeUpdate("insert into moneydata values('" + uuid + "', '" + name + "', 0)");
-            sender.sendMessage(ChatColor.GREEN + "[edamameBank] " +
-                    ChatColor.YELLOW + ChatColor.BOLD + name +
-                    ChatColor.WHITE + ChatColor.BOLD +  "の口座が作成されました");
+            if(!resultSet.next()){
+                this.statement = connection.createStatement();
+                this.statement.executeUpdate("insert into moneydata values('" + uuid + "', '" + name + "', 0)");
+                sender.sendMessage(ChatColor.GREEN + "[edamameBank] " +
+                        ChatColor.WHITE + name +   "のお金の口座を作成しました");
+            }
 
             statement.close();
         }
