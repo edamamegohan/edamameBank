@@ -61,7 +61,7 @@ public class Database {
             this.statement = connection.createStatement();
             String uuid = player.getUniqueId().toString();
             String name = player.getDisplayName();
-            ResultSet resultSet = statement.executeQuery("select * from minedata where uuid = '" + uuid + "'");
+            ResultSet resultSet = statement.executeQuery("select * from moneydata where uuid = '" + uuid + "'");
 
             if(!resultSet.next()){
                 this.statement = connection.createStatement();

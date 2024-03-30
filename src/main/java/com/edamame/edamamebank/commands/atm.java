@@ -82,6 +82,9 @@ public class atm implements CommandExecutor, Listener {
                             ItemStack item = contents[i];
                             if(item != null && item.getType() == Material.GOLD_INGOT){
                                 ItemMeta meta = item.getItemMeta();
+
+                                if(!meta.hasCustomModelData())return;
+
                                 int MoneyCustomModelData = meta.getCustomModelData();
 
                                 //クリックしたアイテムと同じ現金を持っていた時
